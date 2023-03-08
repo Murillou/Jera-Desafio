@@ -10,13 +10,60 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  background-color: rgb(237, 247, 255);
-  
 }
 
 #estilizar-timer{
-  border: 2px solid rgb(13, 12, 12);
+  border: 2px solid white;
   padding: 2%; 
+  color: white;
   font-size: 50px;
   border-radius: 20px;
+}
+
+#funcionalidades{
+  display: flex;
+  gap: 10px;
+}
+
+#mensagem{
+  color: #fefefe;
+  font-size: 17px;
+}
+
+button{
+  background: none;
+  border: 2px solid #fefefefe;
+  padding: 10px 30px;
+  cursor: pointer;
+  color: black;
+}
+
+button:hover{
+  background-color: rgb(104, 104, 236);
+  transform: scale(1.1);
+  color: white;
+}
+
+#gif{
+  background-image: url(Mídia/lofi.gif);
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  animation: animate-gif 10s linear infinite;
+}
+
+@keyframes animate-gif {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }

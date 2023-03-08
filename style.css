@@ -6,17 +6,17 @@
 #timer{
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 50px;
+  gap: 10px;
   background-color: rgb(237, 247, 255);
-  
   
 }
 
 #estilizar-timer{
   border: 2px solid rgb(13, 12, 12);
   padding: 2%; 
-  position: fixed;
+  font-size: 50px;
   border-radius: 20px;
 }

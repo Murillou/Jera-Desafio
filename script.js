@@ -1,14 +1,17 @@
 const minute = document.querySelector('#minute')
 const second = document.querySelector('#second')
 const mensagem = document.querySelector('#mensagem')
-const timer = document.querySelector('#min25')
-let quantidadePomodoro = 0
+const pomodoro = document.querySelector('#min25')
+const intervalo = document.querySelector('#intervalo')
+const audio = new Audio("Mídia/intervalEnd.mp3")
 const sound = new Audio('Mídia/Bells.mp3')
+let quantidadePomodoro = 0
 
 pomodoroInit()
 
-timer.addEventListener('click', function(){
+pomodoro.addEventListener('click', function(){
   mensagem.innerHTML = ''
+  audio.pause()
   sound.pause()
 
   function countdownMinute(){    // contagem de minutos
@@ -36,6 +39,7 @@ timer.addEventListener('click', function(){
           sound.currentTime = 0
           sound.play()
           quantidadePomodoro += 1
+          console.log(quantidadePomodoro)
           if(quantidadePomodoro == 4){
             mensagem.innerHTML = '<strong style="color:#ff0446;">ATENÇÃO:</strong> Você já utilizou o Pomodoro 4 vezes, recomendamos uma pausa de 10 minutos!!'
           }
@@ -51,9 +55,51 @@ timer.addEventListener('click', function(){
   
   countdownMinute()
   countdownSecond()
+  
 })
 
 function pomodoroInit(){
   minute.textContent = '25'
   second.textContent = '00'
 }
+
+intervalo.addEventListener('click', () => {
+  audio.pause()
+  sound.pause()
+    function minutesInterval(){
+      let minutes = 3
+      minute.textContent = '04'
+      const stopInterval = setInterval(() => {
+        minute.textContent = minutes < 10 ? '0' + minutes : minutes
+        minutes--
+        if(minute.textContent === '0'){
+          clearInterval(stopInterval)
+        }
+      }, 60001)
+    }
+
+    function secondsInterval(){
+      let seconds = 58
+      second.textContent = '59'
+      const stopSecond = setInterval(() => {
+        second.textContent = seconds < 10 ? '0' + seconds : seconds
+        seconds--
+        if(seconds < 0){
+          seconds = 59
+          if(minute.textContent == '0'){
+            clearInterval(stopSecond)
+            audio.play()
+          }
+        }
+      }, 1000)
+    }
+
+    audio.addEventListener('ended', () => {
+      audio.currentTime = 0
+      audio.play()
+    })
+
+    minutesInterval()
+    secondsInterval()
+})
+

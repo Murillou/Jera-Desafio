@@ -32,10 +32,10 @@
 
 button{
   background: none;
-  border: 2px solid #fefefefe;
+  border: 2px solid #fffffffe;
   padding: 10px 30px;
   cursor: pointer;
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 button:hover{

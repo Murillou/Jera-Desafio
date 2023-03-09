@@ -30,6 +30,10 @@
   font-size: 17px;
 }
 
+#finalizar:hover{
+    background-color: rgb(223, 69, 69);
+}
+
 button{
   background: none;
   border: 2px solid #fffffffe;

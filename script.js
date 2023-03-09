@@ -6,6 +6,7 @@ const intervalo = document.querySelector('#intervalo')
 const audio = new Audio("Mídia/intervalEnd.mp3")
 const sound = new Audio('Mídia/Bells.mp3')
 let quantidadePomodoro = 0
+let quantidadeInterval = 0
 let minuteInterval
 let secondInterval
 let stopInterval
@@ -27,10 +28,11 @@ function countdownMinute(){    // contagem de minutos
     if(minutes < 0){
       clearInterval(minuteInterval)
    } 
-  }, 100)
+  }, 10)
 }
 
 function countdownSecond(){   // contagem de segundos
+  
   let seconds = 58
   second.textContent = '59'
   secondInterval = setInterval( () => {
@@ -44,12 +46,12 @@ function countdownSecond(){   // contagem de segundos
         sound.play()
         quantidadePomodoro += 1
         console.log(quantidadePomodoro)
-        if(quantidadePomodoro == 4){
-          mensagem.innerHTML = '<strong style="color:#ff0446;">ATENÇÃO:</strong> Você já utilizou o Pomodoro 4 vezes, recomendamos uma pausa de 10 minutos!!'
+      if(quantidadePomodoro === 4 && quantidadeInterval === 0){
+          mensagem.innerHTML = '<strong style="color:#ff0446;">ATENÇÃO:</strong> Você já utilizou o Pomodoro 4 vezes seguidas, recomendamos uma pausa de 10 minutos!!'
         }
       } 
     }
-  }, 100)
+  }, 10)
 }
 
 
@@ -75,6 +77,7 @@ function secondsInterval(){
     if(seconds < 0){
       seconds = 59
       if(minute.textContent == '00'){
+        quantidadeInterval += 1
         clearInterval(stopSecond)
         audio.play()
       }
@@ -103,6 +106,7 @@ function limparIntervalo(){
 }
 
 pomodoro.addEventListener('click', function(){
+  quantidadeInterval = 0
   mensagem.innerHTML = ''
   audio.pause()
   sound.pause() 
@@ -117,6 +121,7 @@ pomodoro.addEventListener('click', function(){
 
 
 intervalo.addEventListener('click', () => {
+  quantidadePomodoro = 0
   audio.pause()
   sound.pause()
 
@@ -133,9 +138,59 @@ const reset = document.querySelector('#reset')
 reset.addEventListener('click', () => {
   audio.pause()
   sound.pause()
+
   limparIntervalo()
   limparPomodoro()
+
   pomodoroInit()
 })
+
+const finalizar = document.querySelector('#finalizar')
+
+finalizar.addEventListener('click', () => {
+  audio.pause()
+  sound.pause()
+
+  console.log(quantidadeInterval)
+ 
+  if(quantidadePomodoro === 0){
+    mensagem.textContent = `Você ainda não utilizou o pomodoro!!`
+  } else if (quantidadePomodoro === 1){
+    mensagem.textContent = `Você utilizou a contagem do pomodoro ${quantidadePomodoro} vez!`
+  }else{
+    mensagem.textContent = `Você utilizou a contagem do pomodoro ${quantidadePomodoro} vezes!`
+  }
+  
+})
+
+
+const escolherTimer = document.querySelector('#escolherTimer')
+
+escolherTimer.addEventListener('click', () => {
+    audio.pause()
+    sound.pause()
+
+    let contagem = prompt(`Informe o tempo do Timer que deseja!`)
+
+    if(contagem < 1 || contagem > 59){
+      mensagem.innerText = `Timer inválido, digite um número de 1 a 59!`
+    }else if (contagem === ''){
+      mensagem.innerText = `Campo vázio, informe um número de 1 a 59!`
+    } 
+    else{
+      
+      const minutesTimerEscolhido = setInterval(() => {
+        minute.textContent = contagem < 10 ? '0' + contagem : contagem
+        contagem--
+        if(minute.textContent == '00'){
+          clearInterval(minutesTimerEscolhido)
+          
+        }
+      }, 1000)
+    }
+
+    secondsInterval()
+})
+
 
 

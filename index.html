@@ -4,32 +4,39 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pomodoro</title>
+  <title>Método Pomodoro</title>
   <link rel="icon" href="Mídia/icon.png" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <main>
-    <div id="gif"></div>
-
+    <div id="gif">
+    </div>
+      
     <div id="timer">
       <div id="estilizar-timer">
         <span id="minute"></span>:<span id="second"></span>
-        
       </div>
     
-        <span id="mensagem"></span>
+      <div id="mensagem"></div>
         
       <div id="funcionalidades">
-        
-        <button id="min25">Iniciar</button> <button id="intervalo">Intervalo (5 MIN)</button> <button id="escolherTimer">Escolha o timer</button>
-        <button id="reset">Resetar</button> <button id="finalizar">Finalizar</button> 
+        <div>
+          <button class="buttons" id="min25">Iniciar</button> <button class="buttons" id="intervalo">Intervalo</button> 
+          <button class="buttons" id="escolherTimer">Escolha o timer</button>
+        </div>
+
+        <div>
+          <button class="buttons" id="contagemPomodoro">Contar Pomodoros</button> 
+          <button class="buttons" id="reset">Resetar</button> 
+        </div>
       </div>
+
     </div>
   </main>
   
-
+    <script src="variaveis.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

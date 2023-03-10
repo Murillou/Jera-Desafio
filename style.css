@@ -22,19 +22,22 @@
 
 #funcionalidades{
   display: flex;
+  flex-direction: column;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 #mensagem{
   color: #fefefe;
-  font-size: 17px;
+  font-size: 20px;
 }
 
-#finalizar:hover{
+#reset:hover{
     background-color: rgb(223, 69, 69);
 }
 
-button{
+.buttons{
   background: none;
   border: 2px solid #fffffffe;
   padding: 10px 30px;
@@ -42,7 +45,7 @@ button{
   color: rgb(255, 255, 255);
 }
 
-button:hover{
+.buttons:hover{
   background-color: rgb(104, 104, 236);
   transform: scale(1.1);
   color: white;

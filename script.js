@@ -71,7 +71,7 @@ function minutesTimer25Min(){
     if(minutes < 0){
       clearInterval(minuteSetIntervalTimer)
    } 
-  }, 100)
+  }, 60001)
 }
 
 function secondsTimer25Min(){  
@@ -97,7 +97,7 @@ function secondsTimer25Min(){
           }
       } 
     }
-  }, 100)
+  }, 1000)
 }
 
 function minutesInterval(){
@@ -111,7 +111,7 @@ function minutesInterval(){
       clearInterval(stopMinutesInterval)
       
     }
-  }, 600)
+  }, 60001)
 }
 
 function secondsInterval(){
@@ -130,7 +130,7 @@ function secondsInterval(){
         somDoIntervalo.play()
       }
     }
-  }, 100)
+  }, 1000)
 }
 
 function secondTimerEscolhido(){
@@ -148,7 +148,7 @@ function secondTimerEscolhido(){
         somDoIntervalo.play()
       }
     } 
-  }, 100)
+  }, 1000)
 }
 
 function timerEscolhido(){
@@ -170,7 +170,7 @@ function timerEscolhido(){
       if(minute.textContent == 00){
         clearInterval(stopMinutesTimerEscolhido)
       }
-    }, 600)
+    }, 60001)
     secondTimerEscolhido()
   }
 }
@@ -184,7 +184,7 @@ function ifTimerEscolhido(){
     if(minute.textContent == 0){
       clearInterval(stopMinutesTimerEscolhido)
     }
-  }, 100)
+  }, 1000)
   secondTimerEscolhido()
 }
 

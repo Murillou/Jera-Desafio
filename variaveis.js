@@ -17,3 +17,4 @@ let secondSetIntervalTimer
 let stopMinutesInterval
 let stopSecondsInterval
 let stopMinutesTimerEscolhido
+let contagem

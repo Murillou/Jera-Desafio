@@ -2,7 +2,7 @@ timerInicial()
 
 timer25Min.addEventListener('click', function(){
   quantidadeInterval = 0
-  mensagem.innerHTML = ''
+  mensagem.innerText = ''
 
   somDoIntervalo.pause()
   somDoTimer25Min.pause() 
@@ -47,6 +47,7 @@ contagemPomodoro.addEventListener('click', () => {
 })
 
 escolherMinutesTimer.addEventListener('click', () => {
+  mensagem.innerText = ''
   somDoIntervalo.pause()
   somDoTimer25Min.pause()
   finalizarTimerEscolhido()
@@ -70,7 +71,7 @@ function minutesTimer25Min(){
     if(minutes < 0){
       clearInterval(minuteSetIntervalTimer)
    } 
-  }, 60001)
+  }, 100)
 }
 
 function secondsTimer25Min(){  
@@ -96,7 +97,7 @@ function secondsTimer25Min(){
           }
       } 
     }
-  }, 1000)
+  }, 100)
 }
 
 function minutesInterval(){
@@ -110,7 +111,7 @@ function minutesInterval(){
       clearInterval(stopMinutesInterval)
       
     }
-  }, 60001)
+  }, 600)
 }
 
 function secondsInterval(){
@@ -129,7 +130,7 @@ function secondsInterval(){
         somDoIntervalo.play()
       }
     }
-  }, 1000)
+  }, 100)
 }
 
 function secondTimerEscolhido(){
@@ -147,30 +148,44 @@ function secondTimerEscolhido(){
         somDoIntervalo.play()
       }
     } 
-  }, 1000)
+  }, 100)
 }
 
 function timerEscolhido(){
-  let contagem = prompt(`Informe o tempo do Timer que deseja!`) - 1
+  contagem = prompt(`Informe os minutos que deseja no timer!`) 
 
-  if( contagem < 0 || contagem > 59){
+  if( contagem < 1 || contagem > 59){
     mensagem.textContent = `Timer inválido, digite um número de 1 a 59!`
   } else if (isNaN(contagem) || contagem === '' || contagem == null){
     mensagem.textContent = `Campo vázio, informe um número de 1 a 59!`
-  } else{
-    minute.textContent = contagem < 10 ? '0' + contagem : contagem 
-    console.log(contagem)
+  } else if (contagem == 1){
+    ifTimerEscolhido()
+  }
+   else{
+    minute.textContent = (contagem - 1) < 10 ? '0' + (contagem - 1) : contagem - 1
+    
     stopMinutesTimerEscolhido = setInterval(() => {
-      minute.textContent = contagem < 10 ? '0' + contagem : contagem 
+      minute.textContent = (contagem - 2) < 10 ? '0' + (contagem - 2) : contagem - 2 
       contagem--
-      console.log(contagem)
-      if(minute.textContent == 0){
-        console.log(contagem)
+      if(minute.textContent == 00){
         clearInterval(stopMinutesTimerEscolhido)
       }
-    }, 60001)
+    }, 600)
     secondTimerEscolhido()
   }
+}
+
+function ifTimerEscolhido(){
+  minute.textContent = contagem < 10 ? '0' + (contagem - 1)  : contagem 
+
+  stopMinutesTimerEscolhido = setInterval(() => {
+    minute.textContent = contagem  < 10 ? '0' + (contagem - 1)  : contagem 
+    contagem--
+    if(minute.textContent == 0){
+      clearInterval(stopMinutesTimerEscolhido)
+    }
+  }, 100)
+  secondTimerEscolhido()
 }
 
 somDoTimer25Min.addEventListener('ended', () => {   
@@ -200,10 +215,10 @@ function finalizarTimerEscolhido(){
 
 function mensagemContagemTimer(){
   if(quantidadeTimer === 0){
-    mensagem.textContent = `Você ainda não utilizou o pomodoro!!`
+    mensagem.textContent = `Você ainda não utilizou a contagem de 25 Minutos!!`
   } else if (quantidadeTimer === 1){
-    mensagem.textContent = `Você utilizou a contagem do pomodoro ${contagemTimerTotal} vez!`
+    mensagem.textContent = `Você utilizou a contagem de 25 Minutos ${contagemTimerTotal} vez!`
   } else{
-    mensagem.textContent = `Você utilizou a contagem do pomodoro ${contagemTimerTotal} vezes!`
+    mensagem.textContent = `Você utilizou a contagem de 25 Minutos ${contagemTimerTotal} vezes!`
   }
 }

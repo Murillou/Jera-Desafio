@@ -34,6 +34,7 @@ reset.addEventListener('click', () => {
 
   somDoIntervalo.pause()
   somDoTimer25Min.pause()
+  finalizarTimerEscolhido()
   finalizarTimerIntervalo()
   finalizarTimer25Min()
   timerInicial()
@@ -69,7 +70,7 @@ function minutesTimer25Min(){
     if(minutes < 0){
       clearInterval(minuteSetIntervalTimer)
    } 
-  }, 60)
+  }, 60001)
 }
 
 function secondsTimer25Min(){  
@@ -82,7 +83,7 @@ function secondsTimer25Min(){
     if(seconds < 0){
       seconds = 59
 
-      if(minute.textContent === '00'){
+      if(minute.textContent == '00'){
         clearInterval(secondSetIntervalTimer)
         somDoTimer25Min.currentTime = 0
         somDoTimer25Min.play()
@@ -95,7 +96,7 @@ function secondsTimer25Min(){
           }
       } 
     }
-  }, 10)
+  }, 1000)
 }
 
 function minutesInterval(){
@@ -105,10 +106,11 @@ function minutesInterval(){
   stopMinutesInterval = setInterval( () => {
     minute.textContent = minutes < 10 ? '0' + minutes : minutes
     minutes--
-    if(minute.textContent === '00'){
+    if(minute.textContent == '00'){
       clearInterval(stopMinutesInterval)
+      
     }
-  }, 60)
+  }, 60001)
 }
 
 function secondsInterval(){
@@ -127,27 +129,47 @@ function secondsInterval(){
         somDoIntervalo.play()
       }
     }
-  }, 100)
+  }, 1000)
+}
+
+function secondTimerEscolhido(){
+  let seconds = 58
+  second.textContent = '59'
+
+  stoptest = setInterval (() => {
+    second.textContent = seconds < 10 ? '0' + seconds : seconds
+    seconds--
+    if(seconds < 0){
+      seconds = 59
+
+      if(minute.textContent == 0){
+        clearInterval(stoptest)
+        somDoIntervalo.play()
+      }
+    } 
+  }, 1000)
 }
 
 function timerEscolhido(){
-  let contagem = prompt(`Informe o tempo do Timer que deseja!`)
+  let contagem = prompt(`Informe o tempo do Timer que deseja!`) - 1
 
-  if(contagem < 0 || contagem > 59){
-    mensagem.innerText = `Timer inválido, digite um número de 1 a 59!`
-  } else if (contagem === '' || contagem == null){
-    mensagem.innerText = `Campo vázio, informe um número de 1 a 59!`
+  if( contagem < 0 || contagem > 59){
+    mensagem.textContent = `Timer inválido, digite um número de 1 a 59!`
+  } else if (isNaN(contagem) || contagem === '' || contagem == null){
+    mensagem.textContent = `Campo vázio, informe um número de 1 a 59!`
   } else{
-    minute.textContent = contagem < 10 ? '0' + (contagem - 1) : contagem - 1
-    minutesTimerEscolhido = setInterval(() => {
-      minute.textContent = contagem < 12 ? '0' + (contagem - 2) : contagem - 2
+    minute.textContent = contagem < 10 ? '0' + contagem : contagem 
+    console.log(contagem)
+    stopMinutesTimerEscolhido = setInterval(() => {
+      minute.textContent = contagem < 10 ? '0' + contagem : contagem 
       contagem--
-      if(minute.textContent == '00'){
-        clearInterval(minutesTimerEscolhido)
-        
+      console.log(contagem)
+      if(minute.textContent == 0){
+        console.log(contagem)
+        clearInterval(stopMinutesTimerEscolhido)
       }
-    }, 1000)
-    secondsInterval()
+    }, 60001)
+    secondTimerEscolhido()
   }
 }
 
@@ -173,7 +195,7 @@ function finalizarTimerIntervalo(){
 
 function finalizarTimerEscolhido(){
   clearInterval(stopMinutesTimerEscolhido)
-  clearInterval(stopSecondsInterval)
+  clearInterval(stoptest)
 }
 
 function mensagemContagemTimer(){

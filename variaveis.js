@@ -1,4 +1,4 @@
-const minute = document.querySelector('#minute')
+const minute = document.querySelector('#minute') 
 const second = document.querySelector('#second')
 const mensagem = document.querySelector('#mensagem')
 const timer25Min = document.querySelector('#min25')
@@ -11,6 +11,7 @@ const somDoTimer25Min = new Audio('Mídia/Bells.mp3')
 let contagemTimerTotal = 0
 let quantidadeTimer = 0
 let quantidadeInterval = 0
+let stoptest
 let minuteSetIntervalTimer
 let secondSetIntervalTimer
 let stopMinutesInterval
